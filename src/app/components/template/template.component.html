@@ -1,0 +1,58 @@
+<h4>Forms <small>template</small> </h4>
+<hr>
+<form (ngSubmit)='saveInfo(form)' #form='ngForm' novalidate>
+  <div>
+
+    <div class="form-gropu row">
+      <label class="col-2 col-form-label"> Name</label>
+      <div class="col-8">
+        <input class="form-control" 
+          type="text" 
+          placeholder="Nombre" 
+          name="name"
+          minlength="5"
+          [(ngModel)]='user.name' 
+          required>
+      </div>
+    </div>
+<br>
+    <div class="form-group row">
+
+      <label class="col-2 col-form-label"> Last name</label>
+      <div class="col-8">
+        <input class="form-control" 
+          type="text" 
+          placeholder="Last name" 
+          name="lastname"
+          minlength="5"
+          [(ngModel)]='user.lastName' 
+          required>
+      </div>
+    </div>
+
+    <div class="form-group row">
+
+      <label class="col-2 col-form-label"> Email</label>
+      <div class="col-md-8">
+        <input class="form-control"
+          type="email" 
+          placeholder="email"
+          name="email"
+          [(ngModel)]='user.email'  
+          required>
+      </div>
+    </div>
+
+
+    <div class="form-group row">
+      <label class="col-2 col-form-label"> &nbsp;</label>
+      <div class="input-group col-md-8">
+
+        <button type="submit" class="btn btn-outline-primary">
+          Save
+        </button>
+      </div>
+    </div>
+
+  </div>
+</form>
