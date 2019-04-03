@@ -10,10 +10,19 @@
           type="text" 
           placeholder="Nombre" 
           name="name"
-          minlength="5"
+          minlength="2"
           [(ngModel)]='user.name' 
-          required>
-      </div>
+          required
+          #name='ngModel'>
+          <!-- solo para los errores #name='ngModel'-->
+      
+          <div *ngIf="name.errors?.required">
+            Este campo es obligatorio.
+          </div>
+          <div *ngIf="name.errors?.minlength">
+            Por lo menos {{name.errors.minlength.requiredLength}} caracteres.
+          </div>
+        </div>
     </div>
 <br>
     <div class="form-group row">
@@ -24,9 +33,13 @@
           type="text" 
           placeholder="Last name" 
           name="lastname"
-          minlength="5"
           [(ngModel)]='user.lastName' 
-          required>
+          required
+          #lastName='ngModel'>
+
+          <div *ngIf="lastName.errors?.required">
+              Este campo es obligatorio.
+          </div>
       </div>
     </div>
 
@@ -39,16 +52,62 @@
           placeholder="email"
           name="email"
           [(ngModel)]='user.email'  
-          required>
+          required
+          pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+          #email='ngModel'>
+
+          <div *ngIf="email.errors?.required">
+            Este campo es obligatorio.
+          </div>
+          <div *ngIf="email.errors?.pattern">
+            El campo no tiene formato completo.
+          </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-2 col-form-label">Country</label>
+      <div class="col-md-8">
+        <select [(ngModel)]="user.country"
+          name="country" id="" class="form-control">
+          <option value="">Select a country</option>
+          <option *ngFor='let country of countries'
+            [value]="country.code"> {{country.name}} </option>
+        </select>
       </div>
     </div>
 
 
     <div class="form-group row">
+        <label class="col-2 col-form-label">Sex</label>
+        <div class="col-md-8">
+
+            <label class="custom-control custom-radio custom-control-inline">
+                <input [(ngModel)]="user.sex"
+                  value='M'
+                  type="radio" 
+                  name="sex" 
+                  class="custom-control-input">
+                <span class="custom-control-label" >M</span>
+              </label>
+              <label class="custom-control custom-radio custom-control-inline">
+                <input [(ngModel)]="user.sex"
+                  value='F'
+                  type="radio" 
+                  name="sex" 
+                  class="custom-control-input">
+                <span class="custom-control-label">F</span>
+              </label>
+          
+        </div>
+    </div>
+
+    <div class="form-group row">
       <label class="col-2 col-form-label"> &nbsp;</label>
       <div class="input-group col-md-8">
 
-        <button type="submit" class="btn btn-outline-primary">
+        <button type="submit"
+          class="btn btn-outline-primary">
           Save
         </button>
       </div>
@@ -56,3 +115,7 @@
 
   </div>
 </form>
+
+<pre>
+  {{ user | json }}
+</pre>
