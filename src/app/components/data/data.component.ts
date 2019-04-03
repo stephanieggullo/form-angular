@@ -14,6 +14,12 @@ export class DataComponent implements OnInit {
 
   form: FormGroup;
 
+  user: object = {
+    name: 'Steph',
+    lastName: 'Guevara',
+    email: null,
+  };
+
   constructor() {
     this.form = new FormGroup({
       'name': new FormControl('', [
@@ -26,6 +32,8 @@ export class DataComponent implements OnInit {
                                       Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$")
                                     ]     )
     });
+
+    this.form.setValue(this.user);
    }
 
   ngOnInit() {
